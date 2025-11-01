@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Настя | Руководитель отдела продаж</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff5f7;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #ffccdd, #ffb6c1);
+      color: #2c3e50;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+    }
+    nav {
+      text-align: center;
+      padding: 15px;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    nav a {
+      color: #e91e63;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 15px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .photo-container {
+      margin: 20px auto;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .photo-container:hover {
+      transform: scale(1.05);
+    }
+    .photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .inspiration {
+      text-align: center;
+      padding: 25px;
+      background: #fff9fb;
+      border-radius: 12px;
+      border-left: 4px solid #ff80ab;
+      font-weight: 600;
+      color: #d32f6c;
+      margin: 30px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .kitten-parade {
+      height: 80px;
+      overflow: hidden;
+      position: relative;
+      background: #ffebee;
+      margin-top: 40px;
+      box-shadow: inset 0 4px 8px rgba(0,0,0,0.05);
+    }
+    .kitten-row {
+      display: flex;
+      position: absolute;
+      white-space: nowrap;
+      animation: scrollKittens 25s linear infinite;
+    }
+    .kitten-row:hover {
+      animation-play-state: paused;
+    }
+    .kitten-walker {
+      width: 70px;
+      height: auto;
+      margin: 0 20px;
+      opacity: 0.8;
+    }
+    @keyframes scrollKittens {
+      0% { transform: translateX(100vw); }
+      100% { transform: translateX(-2000px); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      color: #777;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="about.html">Обо мне</a>
+  </nav>
+
+  <header>
+    <h1>Анастасия</h1>
+    <p>Руководитель отдела продаж в EasyCode</p>
+
+    <label for="photo-upload" class="photo-container" id="photo-preview">
+      <span>📷</span>
+    </label>
+    <input type="file" id="photo-upload" accept="image/*">
+  </header>
+
+  <div class="container">
+    <div class="section">
+      <h2>Кратко обо мне</h2>
+      <p>24 года. Руководитель отдела продаж в EdTech-компании. Бывший МВУ (менеджер вводного урока) с опытом 500+ консультаций и доходом до 150 тыс./мес.</p>
+      <p>Люблю продажи, которые строятся на доверии, и верю, что лучший результат — когда счастливы и клиент, и команда.</p>
+    </div>
+
+    <div class="inspiration">
+      МОЁ ВДОХНОВЕНИЕ — МОЙ КРУТОЙ, ЛЮБИМЫЙ И СИЛЬНЫЙ ОТДЕЛ! 💪
+    </div>
+
+    <div class="section">
+      <h2>Связь со мной</h2>
+      <p>Напишите мне в Telegram: <a href="https://t.me/nestlenestle1" target="_blank">@nestlenestle1</a></p>
+    </div>
+  </div>
+
+  <!-- Движущиеся котики -->
+  <div class="kitten-parade">
+    <div class="kitten-row" id="kitten-row"></div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Анастасия. Все права защищены.</p>
+  </footer>
+
+  <script>
+    // Котики
+    const kittenRow = document.getElementById('kitten-row');
+    const kittenUrl = "https://placekitten.com/120/120";
+    for (let i = 0; i < 20; i++) {
+      const img = document.createElement('img');
+      img.src = kittenUrl;
+      img.alt = 'Котик';
+      img.className = 'kitten-walker';
+      kittenRow.appendChild(img);
+    }
+
+    // Фото профиля
+    const uploadInput = document.getElementById('photo-upload');
+    const photoPreview = document.getElementById('photo-preview');
+    uploadInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          photoPreview.innerHTML = `<img src="${event.target.result}" alt="Фото Насти">`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+</body>
+</html>
